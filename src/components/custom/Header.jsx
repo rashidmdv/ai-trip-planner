@@ -27,7 +27,8 @@ export const Header = () => {
   });
 
   const GetUserProfile = (tokenInfo) => {
-    axios
+    try {
+      axios
       .get(
         `https://www.googleapis.com/oauth2/v3/userinfo?acess_token=${tokenInfo?.access_token}`,
         {
@@ -41,6 +42,9 @@ export const Header = () => {
         localStorage.setItem("user", JSON.stringify(resp.data));
         setOpenDialog(false);
       });
+    } catch (error) {
+      console.log("error"+error);
+    }
   };
 
   useEffect(() => {
